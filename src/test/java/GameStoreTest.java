@@ -61,10 +61,18 @@ public class GameStoreTest {
     }
 
     @Test
-    public void testGenresNotSatisfied(){
+    public void testGenresNotSatisfiedBothGamesHaveGenres(){
         ComputerGameParams params1 = new ComputerGameParams("a", new ArrayList<Genre>(Arrays.asList(Genre.SHOOTER)), new ArrayList<Platform>(), "desc", 14);
         ComputerGame game1 = new ComputerGame(23.5f, params1);
         ComputerGameParams params2 = new ComputerGameParams("b", new ArrayList<Genre>(Arrays.asList(Genre.ACTION)), new ArrayList<Platform>(), "desc", 16);
+        ComputerGame game2 = new ComputerGame(25.5f, params2);
+        assertFalse(gameStore.genresSatisfied(game1, game2));
+    }
+
+    public void testGenresNotSatisfiedOneGameHasGenreAndOneNot(){
+        ComputerGameParams params1 = new ComputerGameParams("a", new ArrayList<Genre>(Arrays.asList(Genre.SHOOTER)), new ArrayList<Platform>(), "desc", 14);
+        ComputerGame game1 = new ComputerGame(23.5f, params1);
+        ComputerGameParams params2 = new ComputerGameParams("b", new ArrayList<Genre>(), new ArrayList<Platform>(), "desc", 16);
         ComputerGame game2 = new ComputerGame(25.5f, params2);
         assertFalse(gameStore.genresSatisfied(game1, game2));
     }
@@ -79,10 +87,18 @@ public class GameStoreTest {
     }
 
     @Test
-    public void testPlatformsNotSatisfied(){
+    public void testPlatformsNotSatisfiedOneGameHasPlatformsAndOneNot(){
         ComputerGameParams params1 = new ComputerGameParams("a", new ArrayList<Genre>(Arrays.asList(Genre.SHOOTER)), new ArrayList<Platform>(Arrays.asList(Platform.WINDOWS_7)), "desc", 14);
         ComputerGame game1 = new ComputerGame(23.5f, params1);
         ComputerGameParams params2 = new ComputerGameParams("b", new ArrayList<Genre>(Arrays.asList(Genre.ACTION)), new ArrayList<Platform>(), "desc", 16);
+        ComputerGame game2 = new ComputerGame(25.5f, params2);
+        assertFalse(gameStore.platformsSatisfied(game1, game2));
+    }
+
+    public void testPlatformsNotSatisfiedBothGamesHavePlatforms(){
+        ComputerGameParams params1 = new ComputerGameParams("a", new ArrayList<Genre>(Arrays.asList(Genre.SHOOTER)), new ArrayList<Platform>(Arrays.asList(Platform.WINDOWS_7)), "desc", 14);
+        ComputerGame game1 = new ComputerGame(23.5f, params1);
+        ComputerGameParams params2 = new ComputerGameParams("b", new ArrayList<Genre>(Arrays.asList(Genre.ACTION)), new ArrayList<Platform>(Arrays.asList(Platform.WINDOWS_10)), "desc", 16);
         ComputerGame game2 = new ComputerGame(25.5f, params2);
         assertFalse(gameStore.platformsSatisfied(game1, game2));
     }
