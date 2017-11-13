@@ -34,18 +34,30 @@ public class GameStore {
         return null;
     }
 
-    private boolean genresSatisfied(ComputerGame game, ComputerGame searchGame){
+    public boolean genresSatisfied(ComputerGame game, ComputerGame searchGame){
         ArrayList<Genre> gameGenres = game.getParams().getGenres();
         ArrayList<Genre> searchGameGenres = searchGame.getParams().getGenres();
+
+        if (searchGameGenres.isEmpty() && gameGenres.isEmpty())
+            return true;
+        else if (searchGameGenres.isEmpty() || gameGenres.isEmpty())
+            return false;
+
         for (Genre genre : searchGameGenres)
             if (!gameGenres.contains(genre))
                 return false;
         return true;
     }
 
-    private boolean platformsSatisfied(ComputerGame game, ComputerGame searchGame){
+    public boolean platformsSatisfied(ComputerGame game, ComputerGame searchGame){
         ArrayList<Platform> gamePlatforms = game.getParams().getPlatforms();
         ArrayList<Platform> searchGamePlatforms = searchGame.getParams().getPlatforms();
+
+        if (gamePlatforms.isEmpty() && searchGamePlatforms.isEmpty())
+            return true;
+        else if (gamePlatforms.isEmpty() || searchGamePlatforms.isEmpty())
+            return false;
+
         for (Platform platform : searchGamePlatforms)
             if (!gamePlatforms.contains(platform))
                 return false;
