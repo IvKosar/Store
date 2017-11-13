@@ -37,9 +37,57 @@ public class GameStoreTest {
     }
 
     @Test
-    public void testSearchNotFound(){
+    public void testSearchNotFoundNoGameInStore(){
         ComputerGameParams params = new ComputerGameParams("a", new ArrayList<Genre>(), new ArrayList<Platform>(), "desc", 14);
         ComputerGame searchGame = new ComputerGame(23.5f, params);
+        assertNull(gameStore.search(searchGame));
+    }
+
+    @Test
+    public void testSearchNotFoundBadAgePrest(){
+        ComputerGameParams storeGameParams = new ComputerGameParams("b", new ArrayList<Genre>(Arrays.asList(Genre.ACTION)), new ArrayList<Platform>(), "desc", 16);
+        ComputerGame game = new ComputerGame(25.5f, storeGameParams);
+        ComputerGameParams searchParams = new ComputerGameParams("a", new ArrayList<Genre>(Arrays.asList(Genre.ACTION)), new ArrayList<Platform>(), "desc", 14);
+        ComputerGame searchGame = new ComputerGame(23.5f, searchParams);
+
+        games = new ArrayList<>();
+        games.add(game);
+        assertNull(gameStore.search(searchGame));
+    }
+
+    @Test
+    public void testSearchNotFoundBadDesc(){
+        ComputerGameParams storeGameParams = new ComputerGameParams("b", new ArrayList<Genre>(Arrays.asList(Genre.ACTION)), new ArrayList<Platform>(), "wrong desc", 14);
+        ComputerGame game = new ComputerGame(25.5f, storeGameParams);
+        ComputerGameParams searchParams = new ComputerGameParams("a", new ArrayList<Genre>(Arrays.asList(Genre.ACTION)), new ArrayList<Platform>(), "desc", 14);
+        ComputerGame searchGame = new ComputerGame(23.5f, searchParams);
+
+        games = new ArrayList<>();
+        games.add(game);
+        assertNull(gameStore.search(searchGame));
+    }
+
+    @Test
+    public void testSearchNotFoundBadGenres(){
+        ComputerGameParams storeGameParams = new ComputerGameParams("b", new ArrayList<Genre>(Arrays.asList(Genre.SHOOTER)), new ArrayList<Platform>(), "desc", 14);
+        ComputerGame game = new ComputerGame(25.5f, storeGameParams);
+        ComputerGameParams searchParams = new ComputerGameParams("a", new ArrayList<Genre>(Arrays.asList(Genre.ACTION)), new ArrayList<Platform>(), "desc", 14);
+        ComputerGame searchGame = new ComputerGame(23.5f, searchParams);
+
+        games = new ArrayList<>();
+        games.add(game);
+        assertNull(gameStore.search(searchGame));
+    }
+
+    @Test
+    public void testSearchNotFoundBadPlatforms(){
+        ComputerGameParams storeGameParams = new ComputerGameParams("b", new ArrayList<Genre>(Arrays.asList(Genre.ACTION)), new ArrayList<Platform>(Arrays.asList(Platform.WINDOWS_7)), "desc", 14);
+        ComputerGame game = new ComputerGame(25.5f, storeGameParams);
+        ComputerGameParams searchParams = new ComputerGameParams("a", new ArrayList<Genre>(Arrays.asList(Genre.ACTION)), new ArrayList<Platform>(Arrays.asList(Platform.UBUNTU)), "desc", 14);
+        ComputerGame searchGame = new ComputerGame(23.5f, searchParams);
+
+        games = new ArrayList<>();
+        games.add(game);
         assertNull(gameStore.search(searchGame));
     }
 
