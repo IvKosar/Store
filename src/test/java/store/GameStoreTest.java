@@ -1,3 +1,5 @@
+package store;
+
 import game.*;
 import store.GameStore;
 
