@@ -6,25 +6,33 @@ import game.ComputerGame;
 
 import java.util.*;
 
-public class ComputerGamesCart{
+public class ComputerGamesCart implements Cart{
     private ArrayList<ComputerGame> games;
     private double totalPrice;
     private PaymentStrategy paymentStrategy;
     private DeliveryStrategy deliveryStrategy;
 
-    public ComputerGamesCart(ArrayList<ComputerGame> games, PaymentStrategy paymentStrategy, DeliveryStrategy deliveryStrategy) {
-        this.games = games;
-        this.totalPrice = computeTotalPrice();
+    public ComputerGamesCart(PaymentStrategy paymentStrategy, DeliveryStrategy deliveryStrategy) {
+        this.games = new ArrayList<>();
+        this.totalPrice = 0.0;
         this.paymentStrategy = paymentStrategy;
         this.deliveryStrategy = deliveryStrategy;
     }
 
-    private double computeTotalPrice() {
-        float price = 0f;
-        for (ComputerGame game : games){
-            price += game.getPrice();
-        }
-        return price;
+    @Override
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    @Override
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    @Override
+    public boolean ship(){
+        System.out.println("The package is shipping!");
+        return true;
     }
 
     public ArrayList<ComputerGame> getGames() {
@@ -38,14 +46,6 @@ public class ComputerGamesCart{
 
     public void setGames(ArrayList<ComputerGame> games) {
         this.games = games;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public PaymentStrategy getPaymentStrategy() {

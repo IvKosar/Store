@@ -1,6 +1,7 @@
 package cart.cartDecorator;
 
 import cart.Cart;
+import cart.ComputerGamesCart;
 import game.ComputerGame;
 import game.ComputerGameParams;
 import game.Genre;
@@ -13,10 +14,9 @@ public class BonusDecorator extends CartDecorator {
         super(cart);
     }
 
+    @Override
     public boolean ship(){
-        ComputerGameParams bonusGameParams = new ComputerGameParams("Bonus Game", new ArrayList<Genre>(), new ArrayList<Platform>(), "Bonus Game Desc", 14);
-        ComputerGame bonusGame = new ComputerGame(0.0f, bonusGameParams);
-        this.cart.addGame(bonusGame);
-        return true;
+        System.out.println("Cool gifts added to your cart!");
+        return cart.ship();
     }
 }

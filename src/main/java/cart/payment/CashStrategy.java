@@ -5,8 +5,7 @@ import cart.payment.PaymentStrategy;
 public class CashStrategy implements PaymentStrategy {
     public boolean pay(double sum){
         if (sum <= 0){
-            System.out.println("Payment is declined! The payment sum is less or equal to zero!");
-            return false;
+            throw new InvalidPaymentSum(sum);
         }
         else {
             System.out.println("Your payment by CASH was successful!");

@@ -21,10 +21,9 @@ public class ComputerGamesCartTest {
 
     @Before
     public void createObject(){
-        ArrayList<ComputerGame> games = new ArrayList<>();
         PaymentStrategy paymentStrategy = new CashStrategy();
         DeliveryStrategy deliveryStrategy = new DeliveryNovaPoshta();
-        computerGamesCart = new ComputerGamesCart(games, paymentStrategy, deliveryStrategy);
+        computerGamesCart = new ComputerGamesCart(paymentStrategy, deliveryStrategy);
     }
     @Test
     public void getGames() throws Exception {
@@ -48,14 +47,13 @@ public class ComputerGamesCartTest {
     }
 
     @Test
-    public void getTotalPrice() throws Exception {
-        assertEquals(0.0f, computerGamesCart.getTotalPrice(), 0.5);
+    public void testGetPrice(){
+        assertEquals(0.0f, computerGamesCart.getTotalPrice(), 0.1);
     }
 
     @Test
-    public void setTotalPrice() throws Exception {
-        float newPrice = 30.2f;
-        computerGamesCart.setTotalPrice(newPrice);
-        assertEquals(newPrice, computerGamesCart.getTotalPrice(), 0.5);
+    public void testSetPrice(){
+        computerGamesCart.setTotalPrice(23.0f);
+        assertEquals(23.0f, computerGamesCart.getTotalPrice(), 0.1);
     }
 }
