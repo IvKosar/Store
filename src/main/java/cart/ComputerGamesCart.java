@@ -3,10 +3,12 @@ package cart;
 import cart.delivery.DeliveryStrategy;
 import cart.payment.PaymentStrategy;
 import game.ComputerGame;
+import user.Observable;
+import user.Observer;
 
 import java.util.*;
 
-public class ComputerGamesCart implements Cart{
+public class ComputerGamesCart extends Observable implements Cart{
     private ArrayList<ComputerGame> games;
     private double totalPrice;
     private PaymentStrategy paymentStrategy;

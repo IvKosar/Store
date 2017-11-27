@@ -1,11 +1,9 @@
 package store;
 
 import game.*;
-import store.GameStore;
 
 import org.junit.Before;
 import org.junit.Test;
-import store.GameStore;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
